@@ -35,9 +35,12 @@ from print_functions_for_lab_checks import *
 def main():
     start_time = time()
 
-    #    TODO: 2. Define get_input_args() function to create & retrieve command
-    # line arguments
+    # retrieve command line arguments
     in_arg = get_input_args()
+
+    print("command line args:\n")
+    # print(in_arg)
+    check_command_line_arguments(in_arg)
 
     # TODO: 3. Define get_pet_labels() function to create pet image labels by
     # creating a dictionary with key=filename and value=file label to be used
@@ -63,6 +66,8 @@ def main():
     # TODO: 7. Define print_results() function to print summary results,
     # incorrect classifications of dogs and breeds if requested.
     print_results()
+
+    sleep(1)
 
     end_time = time()
 
@@ -98,7 +103,13 @@ def get_input_args():
     Returns:
      parse_args() -data structure that stores the command line arguments object
     """
-    pass
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dir', type=str, help="path to pet images", default="pet_images/")
+    parser.add_argument('--arch', type=str, help="neural network model to use", default="vgg")
+    parser.add_argument('--dogfile', type=str, help="file with dog names", default="dognames.txt")
+
+    return parser
 
 
 def get_pet_labels():
